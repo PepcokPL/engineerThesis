@@ -1,6 +1,5 @@
 from django.db import models
 
-#todo dodaæ not nulle
 
 class Presentation(models.Model):
     title = models.CharField(max_length=100)

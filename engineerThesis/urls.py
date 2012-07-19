@@ -4,7 +4,13 @@ from django.conf.urls import patterns, include, url
 from django.contrib import admin
 admin.autodiscover()
 
-urlpatterns = patterns('polls.views',
-    url(r'^polls/', include('polls.urls')),
-    url(r'^admin/', include(admin.site.urls)),
+urlpatterns = patterns('',
+    (r'^', include('presentation.urls')),
+    (r'^admin/', include(admin.site.urls)),
+                       
+                       
+)
+
+urlpatterns += patterns('presnetation.views',
+    url(r'^presentation/',include ('presentation.urls')),                    
 )

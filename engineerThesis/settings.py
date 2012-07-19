@@ -1,4 +1,5 @@
 # Django settings for engineerThesis project.
+import os
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
@@ -27,11 +28,11 @@ DATABASES = {
 # timezone as the operating system.
 # If running in a Windows environment this must be set to the same as your
 # system time zone.
-TIME_ZONE = 'America/Chicago'
+TIME_ZONE = 'Poland/Warsaw'
 
 # Language code for this installation. All choices can be found here:
 # http://www.i18nguy.com/unicode/language-identifiers.html
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'pl-pl'
 
 SITE_ID = 1
 
@@ -44,7 +45,7 @@ USE_I18N = True
 USE_L10N = True
 
 # If you set this to False, Django will not use timezone-aware datetimes.
-USE_TZ = True
+USE_TZ = False
 
 # Absolute filesystem path to the directory that will hold user-uploaded files.
 # Example: "/home/media/media.lawrence.com/media/"
@@ -109,7 +110,8 @@ TEMPLATE_DIRS = (
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
-    'C:\\Users\\Pepcok\\Workspaces\\PythonWorkspace\\engineerThesis\\engineerThesis\\templates'
+    os.path.join( os.path.dirname(__file__), 'templates')
+    #'C:\\Users\\Pepcok\\Workspaces\\PythonWorkspace\\engineerThesis\\engineerThesis\\templates'
 )
 
 INSTALLED_APPS = (
