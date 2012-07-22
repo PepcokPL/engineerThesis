@@ -1,0 +1,20 @@
+{% extends "base_template.html" %}
+
+
+{% block title %}
+	Strona Główna
+{% endblock %}
+
+{% block content %}
+	Tutaj będzie główna zawartośćs, powitanie itp itd
+{% endblock %}
+{% block lblock %}
+	<ul>
+	{% for p in presentations %}
+		<li>
+			<div>{{ p.title }}</div>
+			<div>{{ p.description }}</div>
+		</li>
+	{% endfor %}
+	</ul>
+{% endblock %}

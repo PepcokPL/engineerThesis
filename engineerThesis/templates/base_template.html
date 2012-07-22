@@ -1,0 +1,30 @@
+<html>
+<head>
+	<title>{% block title %}{% endblock %}</title>
+	{% block js %}{% endblock %}
+	{% block css %}<link rel="stylesheet" href="/static/css/main.css">{% endblock %}
+</head>
+<body>
+<div id="main" name="main">
+	<div id="top">
+		<div id="menu">
+			<span>
+				<a href="{% url presentation_index %}">Strona główna</a>
+			</span>
+			<span>
+				<a href="{% url presentation_presentations %}">Dostępne Prezentacje</a>
+			</span>
+			<span>
+				<a href="{% url presentation_add_presentation %}">Dodaj prezentację</a>
+			</span>
+		</div>
+	</div>
+	<div id="lblock" name="lblock">{% block lblock %}{% endblock %}</div>
+	<div id="content" name="content">{% block content %}{% endblock %}</div>
+	<div id="rblock" name="rblock">{% block rblock %}Pusta treć prawego bloku{% endblock %}</div>
+	<div id="footer">{% block footer %}{% endblock %}</div>
+</div>
+
+
+</body>
+</html>

@@ -1,0 +1,24 @@
+{% extends 'presentation/index.html' %}
+
+{% block title %}
+	Dostępne prezentacje
+{% endblock %}
+
+{% block content %}
+	
+	<h2>Dodaj nową prezentację</h2>
+	
+	{% if success %}
+		<h2>Dodano prezentację:</h2>
+		<p><span>Tytuł:</span> {{ title }}</p>
+		<p><span>Opis:</span> {{ description }}</p>
+	{% else %}
+	
+	<form action="." method="POST">
+		{{ presentation_form.as_p }}
+		<input type="submit" value="Wyślij">
+		<input type="reset" value="Wyczyść">
+	</form>
+	{% endif %}
+
+{% endblock %}

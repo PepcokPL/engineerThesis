@@ -1,0 +1,20 @@
+{% extends 'presentation/index.html' %}
+
+{% block title %}
+	Dostępne prezentacje
+{% endblock %}
+
+{% block content %}
+	Stworzone prezentacje: 
+	<ul>
+	{% for p in presentations %}
+		<li>
+			<div>{{ p.title }}</div>
+			<div>{{ p.description }}</div>
+			<div>{{ p.created_at }}</div>
+			<div>Ile slajdów()</div>
+		</li>
+	{% endfor %}
+	</ul>
+
+{% endblock %}
