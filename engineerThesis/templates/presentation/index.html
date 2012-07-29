@@ -9,12 +9,6 @@
 	Tutaj będzie główna zawartośćs, powitanie itp itd
 {% endblock %}
 {% block lblock %}
-	<ul>
-	{% for p in presentations %}
-		<li>
-			<div>{{ p.title }}</div>
-			<div>{{ p.description }}</div>
-		</li>
-	{% endfor %}
-	</ul>
+	{% load current_presentations %}
+	{% current_presentations %}
 {% endblock %}

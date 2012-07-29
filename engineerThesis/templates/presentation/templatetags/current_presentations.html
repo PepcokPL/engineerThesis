@@ -1,0 +1,9 @@
+Dostępne prezentacje:
+<ul>
+	{% for p in current_presentations %}
+		<li>
+			<span><strong><a href="/{{ p.id}}/details">{{ p.title }}</a></strong></span> <br />
+			<span>{{ p.description }}</span>
+		</li>
+	{% endfor %}
+</ul>

@@ -9,10 +9,9 @@
 	<ul>
 	{% for p in presentations %}
 		<li>
-			<div>{{ p.title }}</div>
-			<div>{{ p.description }}</div>
-			<div>{{ p.created_at }}</div>
-			<div>Ile slajdów()</div>
+			<a href="/{{ p.id}}/details"><span>Tytuł: <strong>{{ p.title }}</strong></span></a> <br />
+			<span>Opis: {{ p.description }}</span><br />
+			<span>Slajdów: {{ p.count_slides }}</span>
 		</li>
 	{% endfor %}
 	</ul>

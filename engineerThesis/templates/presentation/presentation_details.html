@@ -1,0 +1,19 @@
+{% extends 'presentation/index.html' %}
+
+{% block title %}
+	{{ presentation.title }}
+{% endblock %}
+
+{% block content %}
+	<span>Tytuł: <strong> {{ presentation.title }}</strong></span><br />
+	<span>Opis: {{ presentation.description }} </span> <br />
+	
+	<span>Dostępne sladjy:</span>
+	<ul>
+		{% for slide in slides %}
+			<li><strong>{{ slide.order_number }}</strong>  {{ slide.description }}</li>
+		{% endfor %}
+	</ul>	
+	
+
+{% endblock %}
