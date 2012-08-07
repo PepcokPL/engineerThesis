@@ -5,10 +5,12 @@
 {% endblock %}
 
 {% block content %}
+	Jakiś pasek nawigacyjny: edytuj, usuń 
 	<span>Tytuł: <strong> {{ presentation.title }}</strong></span><br />
 	<span>Opis: {{ presentation.description }} </span> <br />
 	
 	<span>Dostępne sladjy:</span>
+	<span>Dodaj slajd:</span>
 	<ul>
 		{% for slide in slides %}
 			<li><strong>{{ slide.order_number }}</strong>  {{ slide.description }}</li>

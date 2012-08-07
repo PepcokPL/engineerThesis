@@ -30,3 +30,8 @@ html, body {
 	overflow: hidden;
 	width: 150px;
 }
+
+
+.position-form p {
+	display: inline;	
+}

@@ -1,0 +1,24 @@
+{% extends 'presentation/index.html' %}
+
+{% block title %}
+	Dodaj slajd
+{% endblock %}
+
+{% block content %}
+	
+	<h2>Dodaj slajd</h2>
+	
+	{% if success %}
+		<h2>Poprawnie dodano slajd:</h2>	
+	{% endif %}
+	
+	<form action="." method="POST">
+		<span class="position-form">{{ position_form.as_p }}</span>
+		{{ slide_form.as_p }}
+	
+		<input type="submit" value="Wyślij">
+		<input type="reset" value="Wyczyść">
+		<input type="hidden" name="presentation" id="presentation" value="{{ presentation_id }}" />
+	</form>
+	
+{% endblock %}
