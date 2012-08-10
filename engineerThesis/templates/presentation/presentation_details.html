@@ -13,7 +13,7 @@
 	<span>Dodaj slajd:</span>
 	<ul>
 		{% for slide in slides %}
-			<li><strong>{{ slide.order_number }}</strong>  {{ slide.description }}</li>
+			<li><strong>{{ slide.order_number }}</strong> {{ slide.description }} <a href="{{slide.get_url}}">POGLąD</a></li>
 		{% endfor %}
 	</ul>	
 	

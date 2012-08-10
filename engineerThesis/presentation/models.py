@@ -34,15 +34,18 @@ class Slide(models.Model):
     def __unicode__(self):
         return "Presentation: " + str(self.presentation) + "; order nb: " + str(self.order_number)
     
+    def get_url(self):
+        return "/" + str(self.presentation.id) + '/slide_details/' + str(self.id) 
+    
     class Meta:
         unique_together = (("presentation","order_number"),)
 
 class Position(models.Model):
     id = models.ForeignKey(Slide, primary_key=True)
-    pos_x = models.IntegerField()
-    pos_y = models.IntegerField()
-    pos_z = models.IntegerField(blank=True)
-    rotation = models.IntegerField(blank=True)
+    pos_x = models.IntegerField(blank=True, null=True)
+    pos_y = models.IntegerField(blank=True, null=True)
+    pos_z = models.IntegerField(blank=True, null=True)
+    rotation = models.IntegerField(blank=True, null=True)
     
     def __unicode__(self):
         return "x:"+str(self.pos_x)+",y:"+str(self.pos_y)+",z:"+str(self.pos_z)

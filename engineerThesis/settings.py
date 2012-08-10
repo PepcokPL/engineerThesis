@@ -1,5 +1,8 @@
 # Django settings for engineerThesis project.
+from tinymce import settings
 import os
+from testtinymce import settings
+from django.template.defaultfilters import default
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
@@ -127,6 +130,7 @@ INSTALLED_APPS = (
     # 'django.contrib.admindocs',
     'polls',
     'presentation',
+    'tinymce',
 )
 
 # A sample logging configuration. The only tangible logging
@@ -162,3 +166,8 @@ TEMPLATE_CONTEXT_PROCESSOR = (
     'django.contrib.auth.context_processors.auth',
     'django.core.context_processors.media',
 )
+
+TINYMCE_DEFAULT_CONFIG = {
+    'plugins': "table,spellchecker,paste,searchreplace",
+    'theme': "advanced",
+}

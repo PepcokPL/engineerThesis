@@ -6,6 +6,7 @@ urlpatterns = patterns('engineerThesis.presentation.views',
     url(r'^add_presentation/$', 'add_presentation', name='presentation_add_presentation'),
     url(r'^(?P<presentation_id>\d+)/details/$', 'presentation_details', name='presentation_details'),
     url(r'^(?P<presentation_id>\d+)/add_slide/$', 'add_slide', name='add_slide'),
+    url(r'^(?P<presentation_id>\d+)/slide_details/(?P<slide_id>\d+)/$', 'add_slide', name='add_slide'),
      
     
 )
