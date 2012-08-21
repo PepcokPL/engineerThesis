@@ -1,20 +1,20 @@
 {% extends 'presentation/index.html' %}
 
 {% block title %}
-	Usuń prezentację
+	Usuń slajd
 {% endblock %}
 
 {% block content %}
 
 	{% if not confirmation %}
-		Czy na pewno chcesz usunąć tę prezentację i wszyskie slajdy?
+		Czy na pewno chcesz usunąć ten slajd?
 		<form  action="." method="POST">
 			<input type="submit" value="Tak" name="confirm"/>
 		</form>
 			<input type="submit" value="Nie" name="confirm" onClick="location.href='/{{ presentation.get_details_url }}';" />
 	{% else %}
 	
-		Prezentacja została usunięta.
+		Slajd został usunięty.
 		Powrót do <a href="/{{ presentation.get_details_url }}">Widoku prezentacji</a>
 	
 	{% endif %}

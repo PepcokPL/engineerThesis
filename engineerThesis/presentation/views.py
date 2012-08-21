@@ -79,11 +79,13 @@ def presentation_details(request, presentation_id):
 
 def delete_presentation(request, presentation_id):
     confirmation = False
+    presentation = get_object_or_404(Presentation, pk=presentation_id)
     if request.method == "POST" and request.POST['confirm'] == 'Tak':
-        presentation = get_object_or_404(Presentation, pk=presentation_id)
         presentation.delete()
+        confirmation = True
     ctx = {
            'confirmation': confirmation,
+           'presentation': presentation,
     }    
     return render_to_response('presentation/delete_presentation.html', ctx)
 
@@ -144,3 +146,21 @@ def edit_slide(request, presentation_id, slide_id):
          "edit": True
     }
     return render_to_response('presentation/add_slide.html', ctx)
+
+def delete_slide(request, presentation_id, slide_id):
+    confirmation = False
+    slide = get_object_or_404(Slide, pk=slide_id)
+    presentation = get_object_or_404(Presentation, pk=presentation_id)
+    
+    if request.method == "POST" and request.POST['confirm'] == 'Tak':
+        slide_order_nb = slide.order_number
+        slide.delete()
+        Slide.repair_slide_order(presentation_id, slide_order_nb)
+        
+        confirmation = True
+    ctx = {
+           'confirmation': confirmation,
+           'slide': slide,
+           'presentation': presentation,
+    }    
+    return render_to_response('presentation/delete_slide.html', ctx)

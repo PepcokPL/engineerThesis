@@ -19,6 +19,9 @@ class Presentation(models.Model):
     def get_edit_url(self):
         return '/presentation_edit/' + str(self.id) + '/'
     
+    def get_details_url(self):
+        return str(self.id) + '/details/'
+    
     def get_delete_url(self):
         return '/presentation_delete/' + str(self.id) + '/' 
     
@@ -31,10 +34,12 @@ class Presentation(models.Model):
         return last_slide.order_number + 1
     
     def delete(self, *args, **kwargs):
-        "usuwamy slajdy"
         related_slides = Slide.objects.filter(presentation=self.id)
-        print related_slides
-        #super(Presentation,self).save(*args, **kwargs)
+        if related_slides:
+            for slide in related_slides:
+                slide.delete_related_position()
+                slide.delete()
+        super(Presentation,self).delete(*args, **kwargs)
         
 class Slide(models.Model):
     content = models.TextField(blank=True, null=True)
@@ -44,6 +49,7 @@ class Slide(models.Model):
     created_at = models.DateTimeField(default=datetime.now())
     order_number = models.IntegerField() 
     # TODO dodac auto incerement
+    #TODO napisac usuniecie slajdu
     
     def __unicode__(self):
         return "Presentation: " + str(self.presentation) + "; order nb: " + str(self.order_number)
@@ -53,6 +59,27 @@ class Slide(models.Model):
     
     def get_edit_url(self):
         return "/" + str(self.presentation.id) + '/edit_slide/' + str(self.id)
+    
+    def get_delete_url(self):
+        return "/" + str(self.presentation.id) + '/delete_slide/' + str(self.id)
+    
+    def delete_related_position(self):
+        try:
+            related_position = Position.objects.get(pk=self.id)
+            related_position.delete()
+        except Position.DoesNotExist:
+            print "Pozycja slajdu" + self + "Nie isntieje"
+            print 
+            
+    def decrement_order_number(self):
+        self.order_number = self.order_number-1
+        self.save()        
+            
+    @staticmethod
+    def repair_slide_order(presentation_id, removed_order_number):
+        slides_to_repair = Slide.objects.filter(presentation_id=presentation_id).filter(order_number__gt=removed_order_number)
+        for slide in slides_to_repair:
+            slide.decrement_order_number()
     
     class Meta:
         unique_together = (("presentation","order_number"),)
