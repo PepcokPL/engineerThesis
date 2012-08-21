@@ -6,12 +6,20 @@
 
 {% block content %}
 	
-	<h2>Dodaj nową prezentację</h2>
+	{% if not success %}
+		{%if edit %}
+			<h2>Edytuj prezentację</h2>
+		{% else %}
+			<h2>Dodaj nową prezentację</h2>
+		{% endif %}
+	{% endif %}
 	
 	{% if success %}
+		{%if edit %}
+			<h2>Zmiany zostały poprawnie zapisane</h2>		
+		{% else %}
 		<h2>Dodano prezentację:</h2>
-		<p><span>Tytuł:</span> {{ title }}</p>
-		<p><span>Opis:</span> {{ description }}</p>
+		{% endif %}
 	{% else %}
 	
 	<form action="." method="POST">

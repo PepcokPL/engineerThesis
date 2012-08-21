@@ -5,15 +5,20 @@
 {% endblock %}
 
 {% block content %}
-	Jakiś pasek nawigacyjny: edytuj, usuń 
+	<span id="presentationNavi">
+		<ul>
+			<li><a href="{{presentation.get_edit_url}}">Edytuj informacje o prezentacji</a></li>
+			<li><a href="{{presentation.get_delete_url}}">Usuń prezentację</a></li>
+		</ul>
+	</span>
 	<span>Tytuł: <strong> {{ presentation.title }}</strong></span><br />
 	<span>Opis: {{ presentation.description }} </span> <br />
 	
+	<span><a href="{{presentation.get_add_slide_url}}">Dodaj slajd:</a></span>
 	<span>Dostępne sladjy:</span>
-	<span>Dodaj slajd:</span>
 	<ul>
 		{% for slide in slides %}
-			<li><strong>{{ slide.order_number }}</strong> {{ slide.description }} <a href="{{slide.get_url}}">POGLąD</a></li>
+			<li><strong>{{ slide.order_number }}</strong> {{ slide.description }} <a href="{{slide.get_edit_url}}">POGLąD</a></li>
 		{% endfor %}
 	</ul>	
 	

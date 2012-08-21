@@ -1,10 +1,10 @@
 from django import forms
-from engineerThesis.presentation.models import Slide, Position
+from engineerThesis.presentation.models import Slide, Position, Presentation
 from tinymce.widgets import TinyMCE
 
-class PresentationForm(forms.Form):
-    title = forms.CharField()
-    description = forms.CharField(widget=forms.Textarea)
+class PresentationForm(forms.ModelForm):
+    class Meta:
+        model = Presentation
     
 class SlideForm(forms.ModelForm):
     
