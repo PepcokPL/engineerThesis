@@ -164,3 +164,13 @@ def delete_slide(request, presentation_id, slide_id):
            'presentation': presentation,
     }    
     return render_to_response('presentation/delete_slide.html', ctx)
+
+def preview_slide(request, presentation_id, slide_id):
+    slide = get_object_or_404(Slide, pk=slide_id)
+    presentation = get_object_or_404(Presentation, pk=presentation_id)
+    
+    ctx = {
+           'slide': slide,
+           'presentation': presentation,
+    }
+    return render_to_response('presentation/preview_slide.html', ctx)

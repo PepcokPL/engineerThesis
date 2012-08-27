@@ -19,7 +19,11 @@
 	<ul>
 		{% for slide in slides %}
 			<li><strong>{{ slide.order_number }}</strong> {{ slide.description }} <br />
-				<a href="{{slide.get_delete_url}}">USUŃ</a>   <a href="{{slide.get_edit_url}}">POGLąD</a>   
+				<ul>
+					<li><a href="{{slide.get_delete_url}}">USUŃ</a></li>
+					<li><a href="{{slide.get_edit_url}}">EDYTUJ</a></li>
+					<li><a href="#" onClick="window.open('{{slide.get_preview_url}}')">PODGLąD</a></li>
+				</ul>   
 			</li>
 		{% endfor %}
 	</ul>	

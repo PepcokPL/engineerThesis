@@ -10,6 +10,7 @@ urlpatterns = patterns('engineerThesis.presentation.views',
     
     url(r'^(?P<presentation_id>\d+)/add_slide/$', 'add_slide', name='add_slide'),
     url(r'^(?P<presentation_id>\d+)/edit_slide/(?P<slide_id>\d+)/$', 'edit_slide', name='edit_slide'),
-    url(r'^(?P<presentation_id>\d+)/delete_slide/(?P<slide_id>\d+)/$', 'delete_slide', name='delete_slide'), 
+    url(r'^(?P<presentation_id>\d+)/delete_slide/(?P<slide_id>\d+)/$', 'delete_slide', name='delete_slide'),
+    url(r'^(?P<presentation_id>\d+)/preview_slide/(?P<slide_id>\d+)/$', 'preview_slide', name='preview_slide'), 
     
 )

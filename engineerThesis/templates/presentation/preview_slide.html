@@ -1,0 +1,31 @@
+<!doctype html>
+
+<html lang="pl">
+<head>
+	<meta charset="utf-8" />
+	<title>{{presentation.title}}</title>
+</head>
+<body>
+<div id="impress">
+
+	<div 
+		{% if slide.has_id_title %}
+			id="slide." 
+		{% endif %}
+		class="step" data-x="{{position.pos_x}}" data-y="{{position.pos_y}}" 
+		{% if slide.has_scale %}
+			data-scale="{{position.pos_z}}"
+		{% endif %} 
+		{% if slide.has_rotaton %}
+			data-rotate="{{position.rotation}}"
+		{% endif %}
+		>
+		{{slide.content}}
+	</div>
+</div>
+
+<script src="js/impress.js"></script>
+<script>impress().init();</script>
+
+</body>
+</html>

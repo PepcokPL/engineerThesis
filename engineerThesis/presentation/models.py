@@ -63,6 +63,14 @@ class Slide(models.Model):
     def get_delete_url(self):
         return "/" + str(self.presentation.id) + '/delete_slide/' + str(self.id)
     
+    def get_preview_url(self):
+        return "/" + str(self.presentation.id) + '/preview_slide/' + str(self.id)
+    
+    def has_id_title(self):
+        if self.id_title != '':
+            return True
+        return False
+    
     def delete_related_position(self):
         try:
             related_position = Position.objects.get(pk=self.id)
@@ -93,3 +101,13 @@ class Position(models.Model):
     
     def __unicode__(self):
         return "x:"+str(self.pos_x)+",y:"+str(self.pos_y)+",z:"+str(self.pos_z)
+    
+    def has_pos_z(self):
+        if self.pos_z != '':
+            return True
+        return False
+        
+    def has_rotation(self):
+        if self.rotation != '':
+            return True
+        return False
