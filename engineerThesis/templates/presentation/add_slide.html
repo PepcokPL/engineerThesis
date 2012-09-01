@@ -18,7 +18,9 @@
 			<h2>Poprawnie wyedytowano</h2>
 		{% else %}
 			<h2>Poprawnie dodano</h2>
-		{% endif %}	
+		{% endif %}
+			Powrót do <a href="/{{ presentation.get_details_url }}">Widoku prezentacji</a>
+			<a href="/{{ presentation.get_add_slide_url }}">Dodaj kolejny slajd</a>
 	{% else %}
 	<form action="." method="POST">
 		<span class="position-form">{{ position_form.as_p }}</span>

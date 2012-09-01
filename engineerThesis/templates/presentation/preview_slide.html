@@ -6,25 +6,24 @@
 	<title>{{presentation.title}}</title>
 </head>
 <body>
-<div id="impress">
-
-	<div 
-		{% if slide.has_id_title %}
-			id="slide." 
-		{% endif %}
-		class="step" data-x="{{position.pos_x}}" data-y="{{position.pos_y}}" 
-		{% if slide.has_scale %}
-			data-scale="{{position.pos_z}}"
-		{% endif %} 
-		{% if slide.has_rotaton %}
-			data-rotate="{{position.rotation}}"
-		{% endif %}
-		>
-		{{slide.content}}
+	<div id="impress">
+		<div
+			{% if slide.has_id_title %}
+				id="{{slide.id_title}}" 
+			{% endif %}
+			class="step" data-x="{{position.pos_x}}" data-y="{{position.pos_y}}" 
+			{% if position.has_scale %}
+				data-scale="{{position.pos_z}}"
+			{% endif %} 
+			{% if position.has_rotation %}
+				data-rotate="{{position.rotation}}"
+			{% endif %}
+			>
+			{{slide.content|safe}}
+		</div>
 	</div>
-</div>
-
-<script src="js/impress.js"></script>
+	
+<script src="/static/js/impress.js"></script>
 <script>impress().init();</script>
 
 </body>

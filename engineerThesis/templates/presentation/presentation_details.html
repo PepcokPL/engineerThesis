@@ -14,7 +14,7 @@
 	<span>Tytuł: <strong> {{ presentation.title }}</strong></span><br />
 	<span>Opis: {{ presentation.description }} </span> <br />
 	
-	<span><a href="{{presentation.get_add_slide_url}}">Dodaj slajd:</a></span>
+	<span><big><a href="/{{presentation.get_add_slide_url}}">Dodaj slajd:</a></big></span>
 	<span>Dostępne sladjy:</span>
 	<ul>
 		{% for slide in slides %}

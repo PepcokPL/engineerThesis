@@ -118,6 +118,7 @@ def add_slide(request, presentation_id):
            'success': success,
            'slide_form': slide_form,
            'position_form': position_form,
+           "presentation": presentation,
     }
     
     return render_to_response('presentation/add_slide.html', ctx)
@@ -143,7 +144,8 @@ def edit_slide(request, presentation_id, slide_id):
          "slide_form": slide_form,
          "position_form": position_form,
          "success": success,
-         "edit": True
+         "edit": True,
+         "presentation": presentation,
     }
     return render_to_response('presentation/add_slide.html', ctx)
 
@@ -168,9 +170,11 @@ def delete_slide(request, presentation_id, slide_id):
 def preview_slide(request, presentation_id, slide_id):
     slide = get_object_or_404(Slide, pk=slide_id)
     presentation = get_object_or_404(Presentation, pk=presentation_id)
+    position = get_object_or_404(Position, pk=slide_id)
     
     ctx = {
            'slide': slide,
            'presentation': presentation,
+           'position': position,
     }
     return render_to_response('presentation/preview_slide.html', ctx)

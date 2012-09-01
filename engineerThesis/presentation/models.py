@@ -102,7 +102,7 @@ class Position(models.Model):
     def __unicode__(self):
         return "x:"+str(self.pos_x)+",y:"+str(self.pos_y)+",z:"+str(self.pos_z)
     
-    def has_pos_z(self):
+    def has_scale(self):
         if self.pos_z != '':
             return True
         return False
