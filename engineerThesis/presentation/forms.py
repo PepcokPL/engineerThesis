@@ -10,7 +10,10 @@ class SlideForm(forms.ModelForm):
     
     content = forms.CharField(widget=TinyMCE(
                                              attrs={'cols': 60, 'rows': 15},
-                                             mce_attrs= {'theme': 'advanced'}
+                                             mce_attrs= {
+                                                         'theme_advanced_toolbar_location': 'top',
+                                                         'plugins': 'advimage,media',
+                                                        }
                                              ))
     
     class Meta:

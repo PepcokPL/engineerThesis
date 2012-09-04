@@ -1,5 +1,5 @@
 {% extends 'presentation/index.html' %}
-
+{% block js %}{{ slide_form.media }} {% endblock %}
 {% block title %}
 	Dodaj slajd
 {% endblock %}
@@ -33,3 +33,4 @@
 	{% endif %}
 	
 {% endblock %}
+

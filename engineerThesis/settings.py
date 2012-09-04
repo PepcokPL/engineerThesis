@@ -1,7 +1,5 @@
 # Django settings for engineerThesis project.
-from tinymce import settings
 import os
-from testtinymce import settings
 from django.template.defaultfilters import default
 
 
@@ -60,23 +58,22 @@ MEDIA_ROOT = os.path.normpath(os.path.join(ROOT_PATH, 'media/') )
 # URL that handles the media served from MEDIA_ROOT. Make sure to use a
 # trailing slash.
 # Examples: "http://media.lawrence.com/media/", "http://example.com/media/"
-MEDIA_URL = 'media/'
+MEDIA_URL = '/media/'
 
 # Absolute path to the directory static files should be collected to.
 # Don't put anything in this directory yourself; store your static files
 # in apps' "static/" subdirectories and in STATICFILES_DIRS.
 # Example: "/home/media/media.lawrence.com/static/"
 STATIC_ROOT = os.path.normpath( os.path.join(ROOT_PATH, 'static/') )
-
 # URL prefix for static files.
 # Example: "http://media.lawrence.com/static/"
-STATIC_URL = 'static/'
+STATIC_URL = '/static/'
 
 # Additional locations of static files
 STATICFILES_DIRS = (
     # Put strings here, like "/home/html/static" or "C:/www/django/static".
     # Always use forward slashes, even on Windows.
-    # Don't forget to use absolute paths, not relative paths.
+    # Don't forget to use absolute paths, not relative paths
 )
 
 # List of finder classes that know how to find static files in
@@ -120,6 +117,8 @@ TEMPLATE_DIRS = (
     #'C:\\Users\\Pepcok\\Workspaces\\PythonWorkspace\\engineerThesis\\engineerThesis\\templates'
 )
 
+
+
 INSTALLED_APPS = (
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -127,7 +126,7 @@ INSTALLED_APPS = (
     'django.contrib.sites',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-#    'django.contrib.staticfiles',
+    'tinymce',
     # Uncomment the next line to enable the admin:
      'grappelli',
      'filebrowser',
@@ -136,8 +135,9 @@ INSTALLED_APPS = (
     # 'django.contrib.admindocs',
     'polls',
     'presentation',
-    'tinymce',
 )
+
+
 
 # A sample logging configuration. The only tangible logging
 # performed by this configuration is to send an email to
@@ -174,7 +174,14 @@ TEMPLATE_CONTEXT_PROCESSOR = (
     'django.core.context_processors.static',
 )
 
+#TINYMCE_JS_URL = os.path.normpath( os.path.join(STATIC_ROOT, 'js/tiny_mce/tiny_mce_src.js') )
+#URL_FILEBROWSER_MEDIA = '/admin-media/filebrowser/'
+#FILEBROWSER_URL_TINYMCE = os.path.normpath( os.path.join(STATIC_ROOT, 'js/tiny_mce/') )
+
 TINYMCE_DEFAULT_CONFIG = {
     'plugins': "table,spellchecker,paste,searchreplace",
     'theme': "advanced",
 }
+
+TINYMCE_FILEBROWSER = True
+TINYMCE_JS_ROOT = STATIC_URL + 'js/tiny_mce/tiny_mce.js'
