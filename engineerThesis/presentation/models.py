@@ -25,6 +25,9 @@ class Presentation(models.Model):
     def get_delete_url(self):
         return '/presentation_delete/' + str(self.id) + '/' 
     
+    def get_preview_url(self):
+        return '/presentation_preview/' + str(self.id) + '/' 
+    
     def get_max_slide_order_number(self):
         presentation_slides = Slide.objects.filter(presentation=self)
         if not presentation_slides:
@@ -82,7 +85,7 @@ class Slide(models.Model):
     def decrement_order_number(self):
         self.order_number = self.order_number-1
         self.save()        
-            
+    
     @staticmethod
     def repair_slide_order(presentation_id, removed_order_number):
         slides_to_repair = Slide.objects.filter(presentation_id=presentation_id).filter(order_number__gt=removed_order_number)

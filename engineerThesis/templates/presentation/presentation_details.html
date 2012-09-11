@@ -9,12 +9,13 @@
 		<ul>
 			<li><a href="{{presentation.get_edit_url}}">Edytuj informacje o prezentacji</a></li>
 			<li><a href="{{presentation.get_delete_url}}">Usuń prezentację</a></li>
+			<li><a href="{{presentation.get_preview_url}}">Podgląd prezentacji</a></li>
 		</ul>
 	</span>
 	<span>Tytuł: <strong> {{ presentation.title }}</strong></span><br />
 	<span>Opis: {{ presentation.description }} </span> <br />
 	
-	<span><big><a href="/{{presentation.get_add_slide_url}}">Dodaj slajd:</a></big></span>
+	<span><big><a href="{{presentation.get_add_slide_url}}">Dodaj slajd:</a></big></span>
 	<span>Dostępne sladjy:</span>
 	<ul>
 		{% for slide in slides %}

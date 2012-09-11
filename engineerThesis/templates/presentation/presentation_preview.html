@@ -1,0 +1,22 @@
+<!doctype html>
+
+<html lang="pl">
+<head>
+	<meta charset="utf-8" />
+	<title>{{presentation.tile}}</title>
+</head>
+<body>
+<div id="impress">
+	
+	{% load render_slide_preview %}
+
+	{% for slide in p_slides %}
+		{% render_slide_preview slide.id %}
+	{% endfor %}
+	
+</div>
+<script src="/staticfiles/js/impress.js"></script>
+<script>impress().init();</script>
+
+</body>
+</html>

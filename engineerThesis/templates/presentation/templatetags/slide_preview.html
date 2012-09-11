@@ -1,0 +1,14 @@
+<div
+	{% if slide.has_id_title %}
+		id="{{slide.id_title}}" 
+	{% endif %}
+	class="step" data-x="{{position.pos_x}}" data-y="{{position.pos_y}}" 
+	{% if position.has_scale %}
+		data-scale="{{position.pos_z}}"
+	{% endif %} 
+	{% if position.has_rotation %}
+		data-rotate="{{position.rotation}}"
+	{% endif %}
+	>
+	{{slide.content|safe}}
+</div>

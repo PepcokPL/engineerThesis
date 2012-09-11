@@ -3,6 +3,7 @@ from models import Presentation, Slide
 from engineerThesis.presentation.forms import PresentationForm, PositionForm,\
     SlideForm
 from engineerThesis.presentation.models import Position
+from django.template.loader import render_to_string
 #TODO podzial na pliki
 
 def index(request):
@@ -89,7 +90,32 @@ def delete_presentation(request, presentation_id):
     }    
     return render_to_response('presentation/delete_presentation.html', ctx)
 
+def presentation_preview(requst, presentation_id):
+    presentation = get_object_or_404(Presentation, pk=presentation_id)
+    p_slides = Slide.objects.filter(presentation=presentation_id)
+    slides_ids = ['generate_slide_preview/'+str(slide.id) for slide in p_slides]
+    ctx = {'presentation': presentation,
+           'slides_ids': slides_ids,
+           'p_slides': p_slides,
+           
+    }
+    return render_to_response('presentation/presentation_preview.html', ctx)
 
+def presentation_download(request, presentation_id):
+    presentation = get_object_or_404(Presentation, pk=presentation_id)
+    p_slides = Slide.objects.filter(presentation=presentation_id)
+    slides_ids = ['generate_slide_preview/'+str(slide.id) for slide in p_slides]
+    ctx = {'presentation': presentation,
+           'slides_ids': slides_ids,
+           'p_slides': p_slides,
+           
+    }
+    
+    rednered_template = render_to_string ('presentation/presentation_preview.html', ctx)
+    fixex_rednered_template = rednered_template.replace('../../media/uploads', 'media')
+    print fixex_rednered_template
+    
+    
 def add_slide(request, presentation_id):
     
     presentation = get_object_or_404(Presentation, pk=presentation_id)
@@ -178,3 +204,12 @@ def preview_slide(request, presentation_id, slide_id):
            'position': position,
     }
     return render_to_response('presentation/preview_slide.html', ctx)
+
+def generate_slide_preview(request, slide_id):
+    slide = get_object_or_404(Slide, pk=slide_id)
+    position = get_object_or_404(Position, pk=slide_id)
+    ctx = {
+           'slide': slide,
+           'position': position,
+    }
+    return render_to_response('presentation/generate_slide_preview.html', ctx)
