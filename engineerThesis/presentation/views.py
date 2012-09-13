@@ -1,9 +1,15 @@
+from StringIO import StringIO
+from django.core.servers.basehttp import FileWrapper
+from django.http import HttpResponse  
 from django.shortcuts import render_to_response, get_object_or_404
 from models import Presentation, Slide
 from engineerThesis.presentation.forms import PresentationForm, PositionForm,\
     SlideForm
 from engineerThesis.presentation.models import Position
 from django.template.loader import render_to_string
+import re, os
+import zipfile
+from django.conf import settings
 #TODO podzial na pliki
 
 def index(request):
@@ -112,10 +118,40 @@ def presentation_download(request, presentation_id):
     }
     
     rednered_template = render_to_string ('presentation/presentation_preview.html', ctx)
-    fixex_rednered_template = rednered_template.replace('../../media/uploads', 'media')
-    print fixex_rednered_template
+    print rednered_template
+    fixed_rednered_template = rednered_template.replace('../../../media/uploads', 'media')
+    fixed_rednered_template = fixed_rednered_template.replace('/staticfiles/js', 'js/')
+    media_sources = re.findall('src="([^"]+)"', fixed_rednered_template)
+    files_to_download = []
+    for media_source in media_sources:
+        if media_source.startswith('media/'):
+            files_to_download.append( media_source[6:] )
+    #usunac jesli istnieje
+    zipdata = StringIO()
+   # zipfilename = settings.MEDIA_ROOT+'/zipped_presentations/presentation.zip'
+    zf = zipfile.ZipFile(zipdata, mode='w')
+    try:
+        presentation_filename = settings.MEDIA_ROOT + 'presentation.html'
+        presentation_file = open(presentation_filename, 'w')
+        presentation_file.write(fixed_rednered_template)
+        presentation_file.close()
+        zf.write(presentation_filename, 'presentation.html')
+        
+        zf.write(settings.STATIC_ROOT + '/js/impress.js', 'js/impress.js')
+        
+        for media_file in files_to_download:
+            zf.write(settings.MEDIA_ROOT+'/uploads/'+media_file, 'media/'+media_file)
+    finally:
+        zf.close()
+        zipdata.seek(0)
+
     
-    
+    response = HttpResponse(zipdata.read())
+    response['Content-Disposition'] = 'attachment; filename=presentation.zip'
+    response['Content-Type'] = 'application/x-zip'
+    return response
+
+
 def add_slide(request, presentation_id):
     
     presentation = get_object_or_404(Presentation, pk=presentation_id)

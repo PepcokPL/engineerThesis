@@ -26,7 +26,10 @@ class Presentation(models.Model):
         return '/presentation_delete/' + str(self.id) + '/' 
     
     def get_preview_url(self):
-        return '/presentation_preview/' + str(self.id) + '/' 
+        return '/presentation_preview/' + str(self.id) + '/'
+    
+    def get_download_url(self):
+        return '/presentation_download/' + str(self.id) + '/'  
     
     def get_max_slide_order_number(self):
         presentation_slides = Slide.objects.filter(presentation=self)
