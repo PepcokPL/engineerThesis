@@ -1,7 +1,9 @@
 # coding: utf-8
 
+from django.db import transaction
 from django.db import models
 from datetime import datetime
+import sys
 
 class Presentation(models.Model):
     title = models.CharField(max_length=100)
@@ -20,7 +22,7 @@ class Presentation(models.Model):
         return '/presentation_edit/' + str(self.id) + '/'
     
     def get_details_url(self):
-        return str(self.id) + '/details/'
+        return '/' + str(self.id) + '/details/'
     
     def get_delete_url(self):
         return '/presentation_delete/' + str(self.id) + '/' 
@@ -72,6 +74,12 @@ class Slide(models.Model):
     def get_preview_url(self):
         return "/" + str(self.presentation.id) + '/preview_slide/' + str(self.id)
     
+    def get_move_up_url(self):
+        return '/move_up/' + str(self.id)
+    
+    def get_move_down_url(self):
+        return '/move_down/' + str(self.id)
+    
     def has_id_title(self):
         if self.id_title != '':
             return True
@@ -94,6 +102,49 @@ class Slide(models.Model):
         slides_to_repair = Slide.objects.filter(presentation_id=presentation_id).filter(order_number__gt=removed_order_number)
         for slide in slides_to_repair:
             slide.decrement_order_number()
+            
+    @staticmethod
+    def swich_slides_order(slide_to_move_up, slide_to_move_down):
+        
+        print "to down"
+        print slide_to_move_down.id
+        print "to up"
+        print slide_to_move_up.id
+        
+        print "rozpoczynam switch"
+        print "slide up ma id == %d ; order_nb == %d", slide_to_move_up.id, slide_to_move_up.order_number
+        print "slide down ma id == %d ; order_nb == %d", slide_to_move_down.id, slide_to_move_down.order_number
+        
+        try:
+            slide_to_move_down.order_number = 0
+            slide_to_move_down.save()
+            
+            print "slide to down ma teraz temp o_n == 0"
+            print slide_to_move_down.order_number
+            
+            temp_slide_nb = slide_to_move_up.order_number
+            print "temp o_nb == %d", temp_slide_nb
+            
+            slide_to_move_up.order_number -= 1
+            slide_to_move_up.save()
+            
+            print "slide to up ma teraz o_n == %d", slide_to_move_up.order_number
+            
+            slide_to_move_down.order_number = temp_slide_nb
+            slide_to_move_down.save()
+            
+            print "slide to down ma teraz o_n == %d", slide_to_move_down.order_number
+            
+        except Exception, e:
+            print  e
+        else:
+            print "zamiana się powiodła"
+            
+    def is_first(self):
+        return self.order_number == 1
+        
+    def is_last(self):
+        return self.order_number == Slide.objects.filter(presentation=self.presentation).count()
     
     class Meta:
         unique_together = (("presentation","order_number"),)
