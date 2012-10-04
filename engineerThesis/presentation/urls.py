@@ -14,6 +14,8 @@ urlpatterns = patterns('engineerThesis.presentation.views',
     url(r'^(?P<presentation_id>\d+)/edit_slide/(?P<slide_id>\d+)/$', 'edit_slide', name='edit_slide'),
     url(r'^(?P<presentation_id>\d+)/delete_slide/(?P<slide_id>\d+)/$', 'delete_slide', name='delete_slide'),
     url(r'^(?P<presentation_id>\d+)/preview_slide/(?P<slide_id>\d+)/$', 'preview_slide', name='preview_slide'),
-    url(r'^generate_slide_preview/(?P<slide_id>\d+)/$', 'generate_slide_preview', name='generate_slide_preview'), 
+    url(r'^generate_slide_preview/(?P<slide_id>\d+)/$', 'generate_slide_preview', name='generate_slide_preview'),
+    url(r'^move_up/(?P<slide_id>\d+)/$', 'move_slide', {'direction':'up'} ),
+    url(r'^move_down/(?P<slide_id>\d+)/$', 'move_slide', {'direction':'down'} ),
     
 )

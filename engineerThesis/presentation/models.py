@@ -104,41 +104,28 @@ class Slide(models.Model):
             slide.decrement_order_number()
             
     @staticmethod
+    @transaction.commit_manually
     def swich_slides_order(slide_to_move_up, slide_to_move_down):
-        
-        print "to down"
-        print slide_to_move_down.id
-        print "to up"
-        print slide_to_move_up.id
-        
-        print "rozpoczynam switch"
-        print "slide up ma id == %d ; order_nb == %d", slide_to_move_up.id, slide_to_move_up.order_number
-        print "slide down ma id == %d ; order_nb == %d", slide_to_move_down.id, slide_to_move_down.order_number
         
         try:
             slide_to_move_down.order_number = 0
             slide_to_move_down.save()
             
-            print "slide to down ma teraz temp o_n == 0"
-            print slide_to_move_down.order_number
             
             temp_slide_nb = slide_to_move_up.order_number
-            print "temp o_nb == %d", temp_slide_nb
             
             slide_to_move_up.order_number -= 1
             slide_to_move_up.save()
             
-            print "slide to up ma teraz o_n == %d", slide_to_move_up.order_number
             
             slide_to_move_down.order_number = temp_slide_nb
             slide_to_move_down.save()
             
-            print "slide to down ma teraz o_n == %d", slide_to_move_down.order_number
-            
         except Exception, e:
             print  e
+            transaction.rollback()
         else:
-            print "zamiana się powiodła"
+            transaction.commit()
             
     def is_first(self):
         return self.order_number == 1

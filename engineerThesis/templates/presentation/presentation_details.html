@@ -20,7 +20,7 @@
 	<span>Dostępne sladjy:</span>
 	<ul>
 		{% for slide in slides %}
-			<li><strong>{{ slide.order_number }}</strong> {{ slide.description }} <br />
+			<li><a href="{{slide.get_move_up_url}}">wyżej</a> / <a href="{{slide.get_move_down_url}}">niżej</a> {{ slide.order_number }}: <strong>{{ slide.description }}</strong>  <br />
 				<ul>
 					<li><a href="{{slide.get_delete_url}}">USUŃ</a></li>
 					<li><a href="{{slide.get_edit_url}}">EDYTUJ</a></li>

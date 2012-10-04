@@ -1,7 +1,7 @@
 from StringIO import StringIO
 from django.core.servers.basehttp import FileWrapper
 from django.http import HttpResponse  
-from django.shortcuts import render_to_response, get_object_or_404
+from django.shortcuts import render_to_response, get_object_or_404, redirect
 from models import Presentation, Slide
 from engineerThesis.presentation.forms import PresentationForm, PositionForm,\
     SlideForm
@@ -78,7 +78,7 @@ def edit_presentation(request, presentation_id):
     
 def presentation_details(request, presentation_id):
     presentation = get_object_or_404(Presentation, pk=presentation_id)
-    p_slides = Slide.objects.filter(presentation=presentation_id)
+    p_slides = Slide.objects.filter(presentation=presentation_id).order_by('order_number')
     ctx = { 'presentation': presentation,
            'slides': p_slides,
     }
@@ -120,6 +120,7 @@ def presentation_download(request, presentation_id):
     rednered_template = render_to_string ('presentation/presentation_preview.html', ctx)
     print rednered_template
     fixed_rednered_template = rednered_template.replace('../../../media/uploads', 'media')
+    fixed_rednered_template = fixed_rednered_template.replace('../../../media/uploads', 'media')
     fixed_rednered_template = fixed_rednered_template.replace('/staticfiles/js', 'js/')
     media_sources = re.findall('src="([^"]+)"', fixed_rednered_template)
     files_to_download = []
@@ -249,3 +250,24 @@ def generate_slide_preview(request, slide_id):
            'position': position,
     }
     return render_to_response('presentation/generate_slide_preview.html', ctx)
+
+def move_slide(request, slide_id, direction):
+    slide = get_object_or_404(Slide, pk=slide_id)
+    slide_to_move_up = None
+    slide_to_move_down = None
+    
+    if not ( (direction == 'up' and slide.is_first()) or (direction == 'down' and slide.is_last()) ):
+        if direction == 'up':
+            slide_to_move_up = slide
+            slide_to_move_down = Slide.objects.get(presentation=slide.presentation.id, order_number=slide.order_number-1)
+        else:
+            slide_to_move_down = slide
+            slide_to_move_up = Slide.objects.get(presentation=slide.presentation.id, order_number=slide.order_number+1)
+        print "slide to move up: %d", slide_to_move_up.id
+        print "slide to move down: %D", slide_to_move_down.id
+        Slide.swich_slides_order(slide_to_move_up, slide_to_move_down)
+    return redirect(slide.presentation.get_details_url())
+    
+        
+    
+    

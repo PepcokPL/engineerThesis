@@ -19,7 +19,7 @@
 		{% else %}
 			<h2>Poprawnie dodano</h2>
 		{% endif %}
-			Powrót do <a href="/{{ presentation.get_details_url }}">Widoku prezentacji</a>
+			Powrót do <a href="{{ presentation.get_details_url }}">Widoku prezentacji</a>
 			<a href="{{ presentation.get_add_slide_url }}">Dodaj kolejny slajd</a>
 	{% else %}
 	<form action="." method="POST">
