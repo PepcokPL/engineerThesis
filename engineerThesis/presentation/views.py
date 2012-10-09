@@ -10,6 +10,8 @@ from django.template.loader import render_to_string
 import re, os
 import zipfile
 from django.conf import settings
+from django.utils import simplejson
+
 #TODO podzial na pliki
 
 def index(request):
@@ -268,6 +270,29 @@ def move_slide(request, slide_id, direction):
         Slide.swich_slides_order(slide_to_move_up, slide_to_move_down)
     return redirect(slide.presentation.get_details_url())
     
+def copy_presentation_content(request, presentation_id=None):
+    
+    ctx = None
+    if presentation_id:
+        presentation = get_object_or_404(Presentation, pk=presentation_id)
+        slides = Slide.objects.filter(presentation=presentation)
+        ctx = {'slides':slides,
+               'presentation_chosen': True}
+    else:
+        presentations = Presentation.objects.all()
+        ctx =  {'presentations': presentations,}
+    
+    return render_to_response('presentation/copy_presentation_content.html', ctx)
         
+def get_slide_content(request, slide_id):
+    slide = get_object_or_404(Slide, pk=slide_id)
+    data_to_return = {
+        'success': True,
+        'content': slide.content,
+        'description': slide.description,
+    }
+
+    return HttpResponse(simplejson.dumps(data_to_return, ensure_ascii=False), mimetype='application/json')
+    
     
     

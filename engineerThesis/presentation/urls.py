@@ -18,4 +18,8 @@ urlpatterns = patterns('engineerThesis.presentation.views',
     url(r'^move_up/(?P<slide_id>\d+)/$', 'move_slide', {'direction':'up'} ),
     url(r'^move_down/(?P<slide_id>\d+)/$', 'move_slide', {'direction':'down'} ),
     
+    #TODO zmana nazwy na slide content
+    url(r'^copy_presentation_content/$', 'copy_presentation_content'),
+    url(r'^copy_presentation_content/(?P<presentation_id>\d+)/$', 'copy_presentation_content'),
+    url(r'^get_slide_content/(?P<slide_id>\d+)$', 'get_slide_content'),
 )

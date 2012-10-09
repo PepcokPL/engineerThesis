@@ -1,14 +1,50 @@
 {% extends "base_template.html" %}
 
+{% block css %}<link rel="stylesheet" href="/staticfiles/css/main.css"> {% endblock %}
 
 {% block title %}
 	Strona Główna
 {% endblock %}
 
-{% block content %}
-	Tutaj będzie główna zawartośćs, powitanie itp itd
-{% endblock %}
-{% block lblock %}
-	{% load current_presentations %}
-	{% current_presentations %}
+{% block body %}
+
+	<div id="main" name="main">
+		<div id="top">
+			<div id="menu">
+				<span>
+					<a href="{% url presentation_index %}">Strona główna</a>
+				</span>
+				<span>
+					<a href="{% url presentation_presentations %}">Dostępne Prezentacje</a>
+				</span>
+				<span>
+					<a href="{% url presentation_add_presentation %}">Dodaj prezentację</a>
+				</span>
+			</div>
+		</div>
+		
+		<div id="lblock" name="lblock">
+			{% block lblock %}	
+				{% load current_presentations %}
+				{% current_presentations %}
+			{% endblock %}
+		</div>
+		
+		<div id="content" name="content">
+			{% block content %}
+				Tutaj będzie główna zawartośćs, powitanie itp itd
+			{% endblock %}
+		</div>
+		
+		<div id="rblock" name="rblock">
+			{% block rblock %}
+				Pusta treć prawego bloku
+			{% endblock %}
+		</div>
+		
+		<div id="footer">
+			{% block footer %}{% endblock %}
+		</div>
+	</div>
+
 {% endblock %}

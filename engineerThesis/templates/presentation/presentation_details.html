@@ -24,7 +24,7 @@
 				<ul>
 					<li><a href="{{slide.get_delete_url}}">USUŃ</a></li>
 					<li><a href="{{slide.get_edit_url}}">EDYTUJ</a></li>
-					<li><a href="#" onClick="window.open('{{slide.get_preview_url}}')">PODGLąD</a></li>
+					<li><a href="#" onClick="Presentations.copySlideContent(); return false;">PODGLąD</a></li>
 				</ul>   
 			</li>
 		{% endfor %}

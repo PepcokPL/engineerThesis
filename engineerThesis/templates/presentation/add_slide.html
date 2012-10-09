@@ -1,5 +1,6 @@
 {% extends 'presentation/index.html' %}
-{% block js %}{{ slide_form.media }} {% endblock %}
+
+{% block js %}{{ slide_form.media }}  {% endblock %}
 {% block title %}
 	Dodaj slajd
 {% endblock %}
@@ -12,6 +13,8 @@
 		<h2>Dodaj slajd</h2>
 	{% endif %}
 	
+	<a href="#" onclick="Presentations.copySlideContent(); return false;">Skopiuj z innego slajdu</a>
+	
 	
 	{% if success %}
 		{% if edit %}
@@ -22,15 +25,19 @@
 			Powrót do <a href="{{ presentation.get_details_url }}">Widoku prezentacji</a>
 			<a href="{{ presentation.get_add_slide_url }}">Dodaj kolejny slajd</a>
 	{% else %}
-	<form action="." method="POST">
-		<span class="position-form">{{ position_form.as_p }}</span>
-		{{ slide_form.as_p }}
-	
-		<input type="submit" value="Wyślij">
-		<input type="reset" value="Wyczyść">
-		<input type="hidden" name="presentation" id="presentation" value="{{ presentation_id }}" />
-	</form>
+	<div>
+		<form action="." method="POST">
+			<span class="position-form">{{ position_form.as_p }}</span>
+			{{ slide_form.as_p }}
+		
+			<input type="submit" value="Wyślij">
+			<input type="reset" value="Wyczyść">
+			<input type="hidden" name="presentation" id="presentation" value="{{ presentation_id }}" />
+		</form>
+	</div>
 	{% endif %}
+	
+	<div id="dialog" title="wybierz prezentację" style="visibility:hidden;">Zawartość dialogu</div>
 	
 {% endblock %}
 
