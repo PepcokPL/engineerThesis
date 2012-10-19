@@ -1,0 +1,25 @@
+{% extends "base_template.html" %}
+
+{% block title %}
+	Wybierz prezentację
+{% endblock %}
+
+{% block body %}
+
+{% if presentation_chosen %}
+	<a href="/copy_presentation_content/">Powrót</a><br />
+	Wybierz slajd, który Cię interesuje:
+	<ul>
+		{% for s in slides %}
+			<li><a href="#" onclick="Presentations.getSlideContent({{s.id}}); return false;">{{s.order_number}}.{{s.description}}</a></li>
+		{% endfor %}
+	</ul>
+{% else %}
+	Wybierz prezentację, której zawiera interesujący Cię slajd
+	<ul>
+		{% for p in presentations %}
+			<li><a href="/copy_presentation_content/{{p.id}}">{{p.title}}</a></li>
+		{%endfor%}
+	</ul>
+{% endif %}
+{% endblock %}

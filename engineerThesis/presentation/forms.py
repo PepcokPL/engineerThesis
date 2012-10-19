@@ -13,6 +13,8 @@ class SlideForm(forms.ModelForm):
                                              mce_attrs= {
                                                          'theme_advanced_toolbar_location': 'top',
                                                          'plugins': 'advimage,media',
+                                                         'file_browser_callback' : 'Presentations.presentationFileBrowser',
+
                                                         }
                                              ))
     

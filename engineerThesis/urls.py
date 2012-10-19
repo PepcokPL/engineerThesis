@@ -13,6 +13,7 @@ urlpatterns = patterns('',
     (r'^media/(?P<path>.*)$', 'django.views.static.serve', {'document_root':settings.MEDIA_ROOT}),
     (r'^tinymce/', include('tinymce.urls')),
     (r'^admin/filebrowser/', include(site.urls)),
+    url(r'', include('multiuploader.urls')),
                        
 )
 

@@ -127,13 +127,14 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'tinymce',
+    'sorl.thumbnail',
+    'multiuploader',
     # Uncomment the next line to enable the admin:
      'grappelli',
      'filebrowser',
      'django.contrib.admin',
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
-    'polls',
     'presentation',
 )
 
@@ -183,5 +184,5 @@ TINYMCE_DEFAULT_CONFIG = {
     'theme': "advanced",
 }
 
-TINYMCE_FILEBROWSER = True
+TINYMCE_FILEBROWSER = False
 TINYMCE_JS_ROOT = STATIC_URL + 'js/tiny_mce/tiny_mce.js'

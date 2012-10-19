@@ -293,6 +293,8 @@ def get_slide_content(request, slide_id):
     }
 
     return HttpResponse(simplejson.dumps(data_to_return, ensure_ascii=False), mimetype='application/json')
-    
+
+def load_image(request, presentation_id, slide_id):
+    return render_to_response('presentation/add_image.html')    
     
     
