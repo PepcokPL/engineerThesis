@@ -11,6 +11,14 @@
 <meta charset="utf-8">
 <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.13/themes/base/jquery-ui.css" id="theme">
 <link rel="stylesheet" href="{{ static_url }}multiuploader/styles/jquery.fileupload-ui.css">
+<script type="text/javascript" src="/static/tiny_mce/tiny_mce_popup.js"></script>
+<script src="/staticfiles/js/Presentations.js"></script>
+<script type="text/javascript" src="/static/tiny_mce/tiny_mce.js"></script>
+<script>
+	$(document).ready(function(){
+		Presentations.setPresentationIdInFilebrowser();
+	});
+</script>  
 <div id="fileupload">
     <form action="{% url multi %}" method="POST" enctype="multipart/form-data">
         <div class="fileupload-buttonbar">
@@ -18,6 +26,7 @@
                 <span>Add files...</span>
                 <input type="file" name="files[]" multiple>
             </label>
+            <input type="hidden" name="presentationId" id="presentationId" value="">
             <button type="submit" class="start">Start upload</button>
             <button type="reset" class="cancel">Cancel upload</button>
             <button type="button" class="delete">Delete files</button>
@@ -80,11 +89,13 @@
         {{else}}
             <td class="preview">
                 {{if thumbnail_url}}
-                    <a href="${url}" target="_blank"><img src="${thumbnail_url}"></a>
+                    <a href="#" onClick="Presentations.sendImage('${filepath}'); return false;">
+					<img src="${thumbnail_url}">
+				</a>
                 {{/if}}
             </td>
             <td class="name">
-                <a href="${url}"{{if thumbnail_url}} target="_blank"{{/if}}>${name}</a>
+                ${name}
             </td>
             <td class="size">${sizef}</td>
             <td colspan="2"></td>

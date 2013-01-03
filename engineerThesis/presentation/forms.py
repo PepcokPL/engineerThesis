@@ -9,7 +9,7 @@ class PresentationForm(forms.ModelForm):
 class SlideForm(forms.ModelForm):
     
     content = forms.CharField(widget=TinyMCE(
-                                             attrs={'cols': 60, 'rows': 15},
+                                             attrs={'cols': 100, 'rows': 40},
                                              mce_attrs= {
                                                          'theme_advanced_toolbar_location': 'top',
                                                          'plugins': 'advimage,media',

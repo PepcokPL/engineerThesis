@@ -7,28 +7,28 @@
 
 {% block content %}
 	
-	{% if edit %}
-		<h2>Edytuj slajd</h2>
-	{% else %}
-		<h2>Dodaj slajd</h2>
-	{% endif %}
-	
-	<a href="#" onclick="Presentations.copySlideContent(); return false;">Skopiuj z innego slajdu</a>
-	
-	
 	{% if success %}
 		{% if edit %}
 			<h2>Poprawnie wyedytowano</h2>
 		{% else %}
 			<h2>Poprawnie dodano</h2>
 		{% endif %}
-			Powrót do <a href="{{ presentation.get_details_url }}">Widoku prezentacji</a>
-			<a href="{{ presentation.get_add_slide_url }}">Dodaj kolejny slajd</a>
+			Powrót do <span class="span-with-link"><a href="{{ presentation.get_details_url }}">Widoku prezentacji</a></span>
+			<span class="span-with-link"><a href="{{ presentation.get_add_slide_url }}">Dodaj kolejny slajd</a></span>
 	{% else %}
+		{% if edit %}
+			<h2>Edytuj slajd</h2>
+		{% else %}
+			<h2>Dodaj slajd</h2>
+		{% endif %}
+			<div style="margin-bottom:20px">
+				<a href="#" onclick="Presentations.copySlideContent(); return false;">Skopiuj z innego slajdu</a>
+			</div>
+	
 	<div>
 		<form action="." method="POST">
-			<span class="position-form">{{ position_form.as_p }}</span>
-			{{ slide_form.as_p }}
+			<div class="position-form">{{ position_form.as_p }}</div>
+			<div class="slide-form"></div>{{ slide_form.as_p }}</div>
 		
 			<input type="submit" value="Wyślij">
 			<input type="reset" value="Wyczyść">

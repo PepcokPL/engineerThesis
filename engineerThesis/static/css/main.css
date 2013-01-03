@@ -4,34 +4,129 @@ html, body {
 }
 
 #main {
-	background-color: #484848;
+	
 }
 
 #top {
-	background-color: #686868;
+	background-color: #FFFFFF;
+}
+
+#menu {
+	width: 100%;
+	height: 80px;
+	margin-top: 5px;
+	
+}
+
+#menu > .leftsmallbox {
+	float: left;
+	margin-left: 5%;
+}
+
+#menu > .centersmallbox {
+	width: 390px;
+	margin-right: auto;
+	margin-left: auto;
+}
+
+.smallbox {
+	display: inline-block;
+	margin-left: 20px;
+}
+
+#menu a {
+	text-decoration: none;
+	color: DodgerBlue;
+	font-size: 20px;
+	font-weight: bold;
+}
+
+#menu span:HOVER {
+	background-color: LightSteelBlue;
 }
 
 #content {
-	background-color: #CCCCCC;
-	float: left;
+	background-color: white;
 	overflow: hidden;
+	margin-left: 150px;
+	font-family: Arnoldboecklin, fantasy;
+	color: DarkSlateGray ;
+	font-size: large;
 }
 
-#lblock {
-	background-color: #339900;
-	float: left;
+#content a {
+	text-decoration: none;
+	color: DodgerBlue;
+}
+
+#rblock {
+	float: right;
 	overflow: hidden;
 	width: 200px;
 }
 
-#rblock {
-	background-color: #993300;
-	float: right;
-	overflow: hidden;
-	width: 150px;
+
+#rblock a {
+	text-decoration: none;
+	color: DodgerBlue;
+}
+
+#rblock a:HOVER {
+	color: SlateGray ;
 }
 
 
 .position-form p {
 	display: inline;	
+}
+
+.current-presentation-header {
+	color: SeaGreen;
+	font-size: 20px;
+}
+
+.current-presentation-link{
+	font-size: 18px;
+}
+
+.current-presentation-description{
+	font-size: 13px;
+}
+
+
+
+.content-header {
+	font-size: x-large;
+}
+
+.presentation-data{
+	font-size: xx-large;
+}
+
+.presentation-navi{
+	margin-top: 20px;
+}
+
+.presentation-navi > div:HOVER {
+	background-color: LightSteelBlue;	
+}
+
+.slide-list-header {
+	margin-top: 20px
+}
+
+.slide-box  span {
+	margin-right: 15px;
+}
+
+.slide-box span:HOVER {
+	background-color: LightSteelBlue;	
+}
+
+.span-with-link{
+	margin-right: 15px;
+}
+
+.span-with-link:HOVER {
+	background-color: LightSteelBlue;	
 }

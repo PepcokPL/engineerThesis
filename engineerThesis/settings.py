@@ -16,8 +16,8 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
         'NAME': 'engineerthesis',                      # Or path to database file if using sqlite3.
-        'USER': 'engineer',                      # Not used with sqlite3.
-        'PASSWORD': 'trustme',                  # Not used with sqlite3.
+        'USER': 'root',                      # Not used with sqlite3.
+        'PASSWORD': '',                  # Not used with sqlite3.
         'HOST': 'localhost',                      # Set to empty string for localhost. Not used with sqlite3.
         'PORT': '3306',                      # Set to empty string for default. Not used with sqlite3.
     }
@@ -130,8 +130,6 @@ INSTALLED_APPS = (
     'sorl.thumbnail',
     'multiuploader',
     # Uncomment the next line to enable the admin:
-     'grappelli',
-     'filebrowser',
      'django.contrib.admin',
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
@@ -186,3 +184,4 @@ TINYMCE_DEFAULT_CONFIG = {
 
 TINYMCE_FILEBROWSER = False
 TINYMCE_JS_ROOT = STATIC_URL + 'js/tiny_mce/tiny_mce.js'
+MULTI_IMAGES_FOLDER = 'uploads'

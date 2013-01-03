@@ -34,6 +34,7 @@ def add_presentation(request, presentation_id=None):
     success = False
     title = ""
     description = ""
+    new_presentation = None
     
     if request.method == "POST":
         presentation_form = PresentationForm(request.POST)
@@ -45,7 +46,7 @@ def add_presentation(request, presentation_id=None):
             new_presentation.title = title
             new_presentation.description = description
             new_presentation.save()
-        success = True
+            success = True
     else:
         presentation_form = PresentationForm()
             
@@ -53,6 +54,7 @@ def add_presentation(request, presentation_id=None):
            'title': title,
            'description': description,
            'success': success,
+           'presentation': new_presentation,
     }
     return render_to_response('presentation/add_presentation.html', ctx)
 
@@ -120,9 +122,7 @@ def presentation_download(request, presentation_id):
     }
     
     rednered_template = render_to_string ('presentation/presentation_preview.html', ctx)
-    print rednered_template
     fixed_rednered_template = rednered_template.replace('../../../media/uploads', 'media')
-    fixed_rednered_template = fixed_rednered_template.replace('../../../media/uploads', 'media')
     fixed_rednered_template = fixed_rednered_template.replace('/staticfiles/js', 'js/')
     media_sources = re.findall('src="([^"]+)"', fixed_rednered_template)
     files_to_download = []
@@ -136,14 +136,14 @@ def presentation_download(request, presentation_id):
     try:
         presentation_filename = settings.MEDIA_ROOT + 'presentation.html'
         presentation_file = open(presentation_filename, 'w')
-        presentation_file.write(fixed_rednered_template)
+        presentation_file.write(fixed_rednered_template.encode('utf-8'))
         presentation_file.close()
         zf.write(presentation_filename, 'presentation.html')
         
         zf.write(settings.STATIC_ROOT + '/js/impress.js', 'js/impress.js')
         
         for media_file in files_to_download:
-            zf.write(settings.MEDIA_ROOT+'/uploads/'+media_file, 'media/'+media_file)
+            zf.write(os.path.normpath(settings.MEDIA_ROOT + '/uploads/'+ media_file), 'media/'+media_file)
     finally:
         zf.close()
         zipdata.seek(0)
@@ -294,7 +294,15 @@ def get_slide_content(request, slide_id):
 
     return HttpResponse(simplejson.dumps(data_to_return, ensure_ascii=False), mimetype='application/json')
 
-def load_image(request, presentation_id, slide_id):
-    return render_to_response('presentation/add_image.html')    
+def load_image(request, presentation_id, slide_id=None):
+    
+    is_ok = False
+    if slide_id != None:
+        is_ok = True
+    
+    ctx = {
+        'is_ok': is_ok,
+    }
+    return render_to_response('presentation/add_image.html', ctx)    
     
     

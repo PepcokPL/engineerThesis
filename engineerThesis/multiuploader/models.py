@@ -7,12 +7,19 @@ try:
 except AttributeError:
     storage = 'multiuploader_images/'
 
+def content_file_name(instance, filename):
+    return '/'.join([ storage, instance.presentationId, filename]) 
+
 class MultiuploaderImage(models.Model):
     """Model for storing uploaded photos"""
     filename = models.CharField(max_length=60, blank=True, null=True)
-    image = models.FileField(upload_to=storage)
+    image = models.FileField(upload_to=content_file_name)
     key_data = models.CharField(max_length=90, unique=True, blank=True, null=True)
     upload_date = models.DateTimeField(auto_now_add=True)
+    presentationId = None
+    
+    def setPresentationId(self, presentationId):
+        self.presentationId = presentationId
 
     @property
     def key_generate(self):

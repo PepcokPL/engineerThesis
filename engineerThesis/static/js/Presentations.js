@@ -29,9 +29,9 @@ var Presentations = {
 	},
 	
 	presentationFileBrowser: function(field_name, url, type, win) {
-		console.debug("Field_Name: " + field_name + "nURL: " + url + "nType: " + type + "nWin: " + win); // debug/testing
+//		console.debug("Field_Name: " + field_name + "nURL: " + url + "nType: " + type + "nWin: " + win); // debug/testing
 		var cmsURL = window.location.toString();    // script URL - use an absolute path!
-		console.debug ('cms: '+cmsURL)
+//		console.debug ('cms: '+cmsURL)
 		cmsURL = cmsURL + "loadimages/";
 		
 		tinyMCE.activeEditor.windowManager.open({
@@ -49,5 +49,24 @@ var Presentations = {
 
 
 
+	},
+	
+	sendImage: function(url) {
+	    console.debug(url);
+		var win = tinyMCEPopup.getWindowArg("window");
+	        win.document.getElementById(tinyMCEPopup.getWindowArg("input")).value = url;
+	    if (typeof(win.ImageDialog) != "undefined") {
+	        if (win.ImageDialog.getImageData)
+	            win.ImageDialog.getImageData();
+
+	        if (win.ImageDialog.showPreviewImage)
+	            win.ImageDialog.showPreviewImage(URL);
+	    }
+	    tinyMCEPopup.close();
+	},
+	
+	setPresentationIdInFilebrowser: function() {
+		presentationId = window.location.pathname.split('/')[1];
+		$('#presentationId').val(presentationId);
 	}
 }

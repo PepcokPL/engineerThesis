@@ -44,6 +44,8 @@ def multiuploader(request):
         log.info('received POST to main multiuploader view')
         if request.FILES == None:
             return HttpResponseBadRequest('Must have files attached!')
+        
+        presentationId = request.POST['presentationId']
 
         #getting file data for farther manipulations
         file = request.FILES[u'files[]']
@@ -57,9 +59,13 @@ def multiuploader(request):
         #because we don't need form of any type.
         image = MultiuploaderImage()
         image.filename=str(filename)
+        image.setPresentationId(presentationId)
         image.image=file
         image.key_data = image.key_generate
         image.save()
+        
+        filepath = '/media/'+str(image.image).replace('//', '/')
+        
         log.info('File saving done')
 
         #getting thumbnail url using sorl-thumbnail
@@ -81,10 +87,11 @@ def multiuploader(request):
         result = []
         result.append({"name":filename, 
                        "size":file_size, 
-                       "url":file_url, 
+                       "url": file_url, 
                        "thumbnail_url":thumb_url,
                        "delete_url":file_delete_url+str(image.pk)+'/', 
-                       "delete_type":"POST",})
+                       "delete_type":"POST",
+                       "filepath":filepath})
         response_data = simplejson.dumps(result)
         
         #checking for json data type

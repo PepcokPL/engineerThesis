@@ -15,10 +15,12 @@
 	{% endif %}
 	
 	{% if success %}
-		{%if edit %}
+		{% if edit %}
 			<h2>Zmiany zostały poprawnie zapisane</h2>		
 		{% else %}
-		<h2>Dodano prezentację:</h2>
+		<h2>Dodano prezentację</h2>
+		<span><a href="{{ presentation.get_add_slide_url }}">Dodaj slajd</a></span>
+		<span><a href="{% url presentation_add_presentation %}">Dodaj kolejną prezentację</a></span>
 		{% endif %}
 	{% else %}
 	

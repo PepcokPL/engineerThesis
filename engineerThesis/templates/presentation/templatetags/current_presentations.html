@@ -1,9 +1,11 @@
-Dostępne prezentacje:
+<span class="current-presentation-header">Dostępne prezentacje:</span>
 <ul>
 	{% for p in current_presentations %}
 		<li>
-			<span><strong><a href="/{{ p.id}}/details">{{ p.title }}</a></strong></span> <br />
-			<span>{{ p.description }}</span>
+			<a href="/{{ p.id}}/details">
+				<span class="current-presentation-link"><strong>{{ p.title }}</strong></span> <br />
+				<span class='current-presentation-description'>{{ p.description }}</span>
+			</a>
 		</li>
 	{% endfor %}
 </ul>

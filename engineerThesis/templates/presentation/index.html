@@ -11,19 +11,30 @@
 	<div id="main" name="main">
 		<div id="top">
 			<div id="menu">
-				<span>
-					<a href="{% url presentation_index %}">Strona główna</a>
-				</span>
-				<span>
-					<a href="{% url presentation_presentations %}">Dostępne Prezentacje</a>
-				</span>
-				<span>
-					<a href="{% url presentation_add_presentation %}">Dodaj prezentację</a>
-				</span>
+				<div class="leftsmallbox">
+					<span>
+						<a href="{% url presentation_index %}">Strona główna</a>
+					</span>
+				</div>
+				
+				<div class="centersmallbox">
+					<div class="smallbox">
+						<span>
+							<a href="{% url presentation_presentations %}">Dostępne Prezentacje</a>
+						</span>
+					</div>
+					<div class="smallbox">					
+						<span>
+							<a href="{% url presentation_add_presentation %}">Dodaj prezentację</a>
+						</span>
+					</div>
+				</div>
+				<div></div>
+				
 			</div>
 		</div>
 		
-		<div id="lblock" name="lblock">
+		<div id="rblock" name="rblock">
 			{% block lblock %}	
 				{% load current_presentations %}
 				{% current_presentations %}
@@ -32,15 +43,16 @@
 		
 		<div id="content" name="content">
 			{% block content %}
-				Tutaj będzie główna zawartośćs, powitanie itp itd
+				
 			{% endblock %}
 		</div>
 		
-		<div id="rblock" name="rblock">
-			{% block rblock %}
-				Pusta treć prawego bloku
-			{% endblock %}
-		</div>
+		{% comment %}
+			<div id="rblock" name="rblock">
+				{% block rblock %}
+				{% endblock %}
+			</div>
+		{% endcomment %}
 		
 		<div id="footer">
 			{% block footer %}{% endblock %}

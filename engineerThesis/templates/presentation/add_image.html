@@ -5,6 +5,11 @@
 {% endblock %}
 
 {% block body %}
-	{% load multiuploader %}
-    {% multiupform %}
+
+	{% if is_ok %}
+		{% load multiuploader %}
+	    {% multiupform %}
+	{% else %}
+		<h1>Aby dodać obrazek musisz najpierw zapisać slajd!</h1>
+	{% endif %}
 {% endblock %}
